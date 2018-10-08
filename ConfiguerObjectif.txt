@@ -1,0 +1,91 @@
+VCO1 : ConfigurerObjectif
+Desc : Le Joueur veut donner un objectif au système, le système devra atteindre cet objectif
+Acteur : joueur, tâches quotidiennes
+Précondition : Aucune
+Scénario Nominal :
+	1. le joueur sélectionne "Objectif"
+	2. le système affiche un tableau avec des champs que le joueur doit remplir avec des chiffres positifs.
+	
+	Unités		Ouvrier	- 0 +
+			Soldat	- 0 +
+			Boss	- 0 +
+	Bâtiments	Centre	- 0 +
+			Ferme	- 0 +
+			Caserne	- 0 +
+			Hall	- 0 +
+	
+	Banque		PO	- 0 +
+		
+		Cancel	Ok
+	
+	3. le joueur donne les paramètres de son objectif, puis valide.
+	4. le système reçoit l'objectif donné par le joueur, et affiche le BO correspondant
+	
+	...
+	Produire X Ouvrier
+	Produire Y Fermes
+	...
+
+	5. le joueur valide le BO
+
+Postcondition : enregistrer le BO dans le système
+Alternatives :
+	E1 : Quitter ConfigurerObjectf
+	en SN2, si le joueur sélectionne "Cancel".
+	E1.1 : le système retourne à l'écran d'accueil.
+
+//Enregistrer les versions pour être réutilisables dans des fichiers.
+VC03 : ConfigurerVersion
+Desc : le joueur veut modifier les prérequis, les coûts, et les types d'unités et bâtiments du jeu.
+Acteur : joueur
+Précondition : aucune
+Scénario Nominal :
+	1. le joueur sélectionne "Version"
+	2. le système affiche l'écran suivant
+
+		Charger Version
+		Sauvegarder Version
+
+		Nom Version
+
+			Type	Cout PO	Cout N	Temps	Prérequis	Mobilise	Fournit
+	Unités		Ouvrier	-X+    X	X	X	X		X		X	del
+			Soldat										del
+			Boss	
+			add?
+	
+	Bâtiments	Centre	
+			Ferme	
+			Caserne	
+			Hall	
+			add?
+
+	Ress 		P0
+			N
+			add?
+		
+		Départ de partie
+
+	Unités		Ouvrier	- 0 +
+			Soldat	- 0 +
+			Boss	- 0 +
+			X	- 0 +
+	Bâtiments	Centre	- 0 +
+			Ferme	- 0 +
+			Caserne	- 0 +
+			Hall	- 0 +
+			Y	- 0 +
+	
+	Banque		PO	- 0 +
+		
+											Cancel	Selectionner Version
+
+	3. le joueur valide.
+	4. le système vérifie que tous les bâtiments/unités ont un coût, un temps de construction, et mobilise quelque chose.
+	5. le système vérifie que tous les prérequis existent dans la table, et qu'aucun bâtiment/unité n'aie lui même en prérequis, qu'il n'y ait pas de cycle, sauf si un membre du cycle fait partie des bâtiments/unités de base de la version
+	6. le joueur selectionne "Selectionner cette version"
+	7.le système selectionne cette version comme la version actuelle
+
+	
+	
+
